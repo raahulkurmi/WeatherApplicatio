@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">WeatherApplicatio</string>
+    <string name="search">Search</string>
+    <string name="time">Time</string>
+    <string name="min_temp">Min Temp</string>
+    <string name="max_temp">Max Temp</string>
+    <string name="_12">12</string>
+    <string name="feels_like">Feels Like</string>
+    <string name="todo">TODO</string>
+    <string name="weather">Weather</string>
+    <string name="_100">100</string>
+    <string name="pressure">Pressure</string>
+    <string name="humidity">Humidity</string>
+    <string name="wind">Wind</string>
+    <string name="sunrise">Sunrise</string>
+    <string name="sunset">Sunset</string>
+    <string name="f">°F</string>
+</resources>
