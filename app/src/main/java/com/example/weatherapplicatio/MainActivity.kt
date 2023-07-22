@@ -21,6 +21,7 @@ import androidx.databinding.DataBindingUtil
 import com.example.weatherapplicatio.Models.WeatherModel
 import com.example.weatherapplicatio.Utilites.ApiUtilities
 import com.example.weatherapplicatio.databinding.ActivityMainBinding
+//import com.example.weatherapplicatio.databinding.ActivityMainBindingImpl
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import retrofit2.Call
@@ -35,7 +36,10 @@ import kotlin.math.roundToInt
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var binding: ActivityMainBinding
+//    lateinit var binding: ActivityMainBinding
+    private val binding by lazy {
+ActivityMainBinding.inflate(layoutInflater)
+}
 
     private lateinit var currentLocation: Location
 
@@ -50,9 +54,9 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(binding.root)
 
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+//        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
         fusedLocationProvider = LocationServices.getFusedLocationProviderClient(this)
 
@@ -86,6 +90,7 @@ class MainActivity : AppCompatActivity() {
 
             getCurrentLocation()
         }
+
 
     }
 
@@ -208,7 +213,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun isLocationEnabled(): Boolean {
 
-        val locationManager: LocationManager = getSystemService(Context.LOCATION_SERVICE)
+        val locationManager: LocationManager = getSystemService(LOCATION_SERVICE)
                 as LocationManager
 
         return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
@@ -266,6 +271,13 @@ class MainActivity : AppCompatActivity() {
 
             weatherTitle.text = body.weather[0].main
 
+//            if(binding.weatherTitle.text.toString().equals("Clear")){
+//                Toast.makeText(this@MainActivity, "clear", Toast.LENGTH_SHORT).show()
+//                binding.animationView1.visibility=View.VISIBLE
+//
+//
+//
+//            }
             sunriseValue.text = tst2d(body.sys.sunrise.toLong())
 
             sunsetValue.text = tst2d(body.sys.sunset.toLong())
@@ -327,6 +339,20 @@ class MainActivity : AppCompatActivity() {
                         .getDrawable(this@MainActivity, R.drawable.thunderstrom_bg)
                     optionsLayout.background = ContextCompat
                         .getDrawable(this@MainActivity, R.drawable.thunderstrom_bg)
+//                    animationView.visibility=View.VISIBLE
+//                    animationView1.visibility=View.VISIBLE
+                    binding.rain.visibility=View.GONE
+                    binding.clear.visibility=View.GONE
+                    binding.drizleday.visibility=View.GONE
+                    binding.thnderstrom.visibility=View.VISIBLE
+                    binding.cloud.visibility=View.GONE
+                    binding.snow.visibility=View.GONE
+                    binding.haze.visibility=View.GONE
+
+
+
+
+
                 }
 
                 //Drizzle
@@ -338,6 +364,21 @@ class MainActivity : AppCompatActivity() {
                         .getDrawable(this@MainActivity, R.drawable.drizzle_bg)
                     optionsLayout.background = ContextCompat
                         .getDrawable(this@MainActivity, R.drawable.drizzle_bg)
+//                    animationView.visibility=View.VISIBLE
+//                    animationView1.visibility=View.VISIBLE
+                    binding.rain.visibility=View.GONE
+                    binding.clear.visibility=View.GONE
+                    binding.drizleday.visibility=View.VISIBLE
+                    binding.thnderstrom.visibility=View.GONE
+                    binding.cloud.visibility=View.GONE
+                    binding.snow.visibility=View.GONE
+                    binding.haze.visibility=View.GONE
+
+
+
+
+
+
                 }
 
                 //Rain
@@ -349,6 +390,22 @@ class MainActivity : AppCompatActivity() {
                         .getDrawable(this@MainActivity, R.drawable.rain_bg)
                     optionsLayout.background = ContextCompat
                         .getDrawable(this@MainActivity, R.drawable.rain_bg)
+//                    animationView.visibility=View.VISIBLE
+//                    animationView1.visibility=View.VISIBLE
+                    binding.rain.visibility=View.VISIBLE
+                    binding.clear.visibility=View.GONE
+                    binding.drizleday.visibility=View.GONE
+                    binding.thnderstrom.visibility=View.GONE
+                    binding.cloud.visibility=View.GONE
+
+                    binding.snow.visibility=View.GONE
+                    binding.haze.visibility=View.GONE
+
+
+
+
+
+
                 }
 
                 //Snow
@@ -360,6 +417,21 @@ class MainActivity : AppCompatActivity() {
                         .getDrawable(this@MainActivity, R.drawable.snow_bg)
                     optionsLayout.background = ContextCompat
                         .getDrawable(this@MainActivity, R.drawable.snow_bg)
+//                    animationView.visibility=View.VISIBLE
+//                    animationView1.visibility=View.VISIBLE
+                    binding.rain.visibility=View.GONE
+                    binding.clear.visibility=View.GONE
+                    binding.drizleday.visibility=View.GONE
+                    binding.thnderstrom.visibility=View.GONE
+                    binding.cloud.visibility=View.GONE
+                    binding.snow.visibility=View.VISIBLE
+                    binding.haze.visibility=View.GONE
+
+
+
+
+
+
                 }
 
                 //Atmosphere
@@ -371,16 +443,47 @@ class MainActivity : AppCompatActivity() {
                         .getDrawable(this@MainActivity, R.drawable.atmosphere_bg)
                     optionsLayout.background = ContextCompat
                         .getDrawable(this@MainActivity, R.drawable.atmosphere_bg)
+//                    animationView.visibility=View.VISIBLE
+//                    animationView1.visibility=View.VISIBLE
+                    binding.rain.visibility=View.GONE
+                    binding.clear.visibility=View.GONE
+                    binding.drizleday.visibility=View.GONE
+                    binding.thnderstrom.visibility=View.GONE
+                    binding.cloud.visibility=View.GONE
+                    binding.snow.visibility=View.GONE
+                    binding.haze.visibility=View.VISIBLE
+
+
+
+
+
+
                 }
 
                 //Clear
                 800 -> {
+//                    animationView.visibility=View.VISIBLE
                     weatherimg.setImageResource(R.drawable.ic_clear_day)
 
                     mainLayout.background = ContextCompat
                         .getDrawable(this@MainActivity, R.drawable.clear_bg)
                     optionsLayout.background = ContextCompat
                         .getDrawable(this@MainActivity, R.drawable.clear_bg)
+//                    binding.animationView1.visibility=View.VISIBLE
+//                    animationView1.visibility=View.VISIBLE
+                    binding.clear.visibility=View.VISIBLE
+                    binding.rain.visibility=View.GONE
+                    binding.drizleday.visibility=View.GONE
+                    binding.thnderstrom.visibility=View.GONE
+                    binding.cloud.visibility=View.GONE
+                    binding.snow.visibility=View.GONE
+                    binding.haze.visibility=View.GONE
+
+
+
+
+
+
                 }
 
                 //Clouds
@@ -391,6 +494,19 @@ class MainActivity : AppCompatActivity() {
                         .getDrawable(this@MainActivity, R.drawable.clouds_bg)
                     optionsLayout.background = ContextCompat
                         .getDrawable(this@MainActivity, R.drawable.clouds_bg)
+//                    animationView.visibility=View.VISIBLE
+//                    animationView1.visibility=View.VISIBLE
+                    binding.clear.visibility=View.GONE
+                    binding.rain.visibility=View.GONE
+                    binding.drizleday.visibility=View.GONE
+                    binding.thnderstrom.visibility=View.GONE
+                    binding.cloud.visibility=View.VISIBLE
+                    binding.snow.visibility=View.GONE
+                    binding.haze.visibility=View.GONE
+
+
+
+
 
                 }
 
@@ -402,7 +518,22 @@ class MainActivity : AppCompatActivity() {
                         .getDrawable(this@MainActivity, R.drawable.unknown_bg)
                     optionsLayout.background = ContextCompat
                         .getDrawable(this@MainActivity, R.drawable.unknown_bg)
+//                    animationView1.visibility=View.VISIBLE
+                    binding.clear.visibility=View.GONE
+                    binding.rain.visibility=View.GONE
+                    binding.drizleday.visibility=View.GONE
+                    binding.thnderstrom.visibility=View.GONE
+                    binding.cloud.visibility=View.GONE
+                    binding.snow.visibility=View.GONE
+                    binding.haze.visibility=View.GONE
+
+
+
+
+
+
                 }
+
             }
 
         }
